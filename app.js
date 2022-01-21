@@ -24,13 +24,27 @@ let connection = mysql.createConnection({
 // });
 
 // INSERTING DATA TAKE 2
-let person = {
-  email: faker.internet.email(),
-  created_at: faker.date.past(),
-};
+// let person = {
+// 	email: faker.internet.email(),
+// 	created_at: faker.date.past()
+// };
 
-connection.query("INSERT INTO users SET ?", person, function (error, result) {
-  if (error) throw error;
+// let end_result = connection.query('INSERT INTO users SET ?', person, function (error, result) {
+// 	if (error) throw error;
+// 	console.log(result);
+// });
+
+// INSERTING LOTS OF DATA
+let data = [];
+
+for (let i = 0; i < 500; i++) {
+  data.push([faker.internet.email(), faker.date.past()]);
+}
+
+var q = "INSERT INTO users (email, created_at) VALUES ?";
+
+connection.query(q, [data], function (err, result) {
+  console.log(err);
   console.log(result);
 });
 
