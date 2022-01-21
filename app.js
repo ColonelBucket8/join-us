@@ -24,7 +24,10 @@ let connection = mysql.createConnection({
 // });
 
 // INSERTING DATA TAKE 2
-let person = { email: faker.internet.email() };
+let person = {
+  email: faker.internet.email(),
+  created_at: faker.date.past(),
+};
 
 connection.query("INSERT INTO users SET ?", person, function (error, result) {
   if (error) throw error;
